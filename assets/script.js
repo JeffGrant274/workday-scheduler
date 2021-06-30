@@ -4,10 +4,10 @@ $(document).ready(function () {
     let displayDate = document.getElementById("curDate");
     displayDate.innerHTML = nowMoment;
     let jumboTime = moment().format("h:mm:ss a");
-    displayTime.innerHTML = jumboTime;
     let currentHour = moment().format("HH");
     let displayTime = document.getElementById("curHour")
-  
+    displayTime.innerHTML = jumboTime;
+
     //Compares time block to actual time
     $(".tdiv").each(function () {
       var timeDiv = $(this).attr("id").split("-")[1];
