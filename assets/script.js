@@ -1,84 +1,49 @@
 $(document).ready(function () {
+    //Code for current date and time
+    let nowMoment = moment().format("MMMM Do YYYY");
+    let displayDate = document.getElementById("curDate");
+    displayDate.innerHTML = nowMoment;
+    let jumboTime = moment().format("h:mm:ss a");
+    displayTime.innerHTML = jumboTime;
+    let currentHour = moment().format("HH");
+    let displayTime = document.getElementById("curHour")
+  
+    //Compares time block to actual time
+    $(".tdiv").each(function () {
+      var timeDiv = $(this).attr("id").split("-")[1];
+      
+      if (currentHour == timeDiv) {
+        $(this).addClass("present");
+      } else if (currentHour < timeDiv) {
+        $(this).removeClass("present");
+        $(this).addClass("future");
+      } else if (currentHour > timeDiv) {
+        $(this).removeClass("future");
+        $(this).addClass("past");
+      }
+    });
+  
+    //grabs values from time saves to local storage
+    $(".saveBtn").click(function (event) {
+      event.preventDefault();
+      var value = $(this).siblings(".tblock").val();
+      var time = $(this).parent().attr("id").split("-")[1];
+      localStorage.setItem(time, value);
+    });
+  
+    //retrieves items from local storage and sets them in proper places
+    $("#hour-08 .tblock").val(localStorage.getItem("08"));
+    $("#hour-09 .tblock").val(localStorage.getItem("09"));
+    $("#hour-10 .tblock").val(localStorage.getItem("10"));
+    $("#hour-11 .tblock").val(localStorage.getItem("11"));
+    $("#hour-12 .tblock").val(localStorage.getItem("12"));
+    $("#hour-13 .tblock").val(localStorage.getItem("13"));
+    $("#hour-14 .tblock").val(localStorage.getItem("14"));
+    $("#hour-15 .tblock").val(localStorage.getItem("15"));
+    $("#hour-16 .tblock").val(localStorage.getItem("16"));
+    $("#hour-17 .tblock").val(localStorage.getItem("17"));
+    $("#hour-18 .tblock").val(localStorage.getItem("18"));
+    $("#hour-19 .tblock").val(localStorage.getItem("19"));
+    $("#hour-20 .tblock").val(localStorage.getItem("20"));
 
-    var init = false;
-    var now = moment().format('LLLL'); // Day, M/D/Y/T format
-
-    let now24 = moment().format('H'); // 12 hour clock format
-    let now12 = moment().format('h'); // 24 hour clock format
-    if (init) {
-        now24 = 13;
-        now12 = 1;
-    }
-
-    // Display current date
-    const currentDate = $('#currentDay');
-    currentDate.text(now);
-
-    var cal = new Date(); // init date and time
-    var currentHour = cal.getHours(); // returns 0-23 on a 24 hour clock
-
-    for (var i = 8; i < 18; i++) {
-        if (i < currentHour) {
-            document.getElementById(i.toString()).classList.add('past');
-        } else if (i === currentHour) {
-            document.getElementById(i.toString()).classList.add('present');
-        } else if (i > currentHour) {
-            document.getElementById(i.toString()).classList.add('future');
-        }
-    }
-    // Local Storage Feature
-
-     {
-        $('.saveBtn').click(function () {
-            var hr8 = document.getElementById('8').value;
-			localStorage.setItem('text8', hr8);
-			var hr9 = document.getElementById('9').value;
-			localStorage.setItem('text9', hr9);
-			var hr10 = document.getElementById('10').value;
-			localStorage.setItem('text10', hr10);
-			var hr11 = document.getElementById('11').value;
-			localStorage.setItem('text11', hr11);
-			var hr12 = document.getElementById('12').value;
-			localStorage.setItem('text12', hr12);
-			var hr13 = document.getElementById('13').value;
-			localStorage.setItem('text13', hr13);
-			var hr14 = document.getElementById('14').value;
-			localStorage.setItem('text14', hr14);
-			var hr15 = document.getElementById('15').value;
-			localStorage.setItem('text15', hr15);
-			var hr16 = document.getElementById('16').value;
-			localStorage.setItem('text16', hr16);
-			var hr17 = document.getElementById('17').value;
-			localStorage.setItem('text17', hr17);
-            var hr17 = document.getElementById('18').value;
-			localStorage.setItem('text18', hr17);
-            var hr17 = document.getElementById('19').value;
-			localStorage.setItem('text19', hr17);
-            var hr17 = document.getElementById('20').value;
-			localStorage.setItem('text20', hr17);
-        });
-     }
-
-     // Display saved tasks
-     var saved8 = localStorage.getItem('text8');
-     document.getElementById('8').value = saved8;
-     var saved9 = localStorage.getItem('text9');
-     document.getElementById('9').value = saved9;
-     var saved10 = localStorage.getItem('text10');
-     document.getElementById('10').value = saved10;
-     var saved11 = localStorage.getItem('text11');
-     document.getElementById('11').value = saved11;
-     var saved12 = localStorage.getItem('text12');
-     document.getElementById('12').value = saved12;
-     var saved13 = localStorage.getItem('text13');
-     document.getElementById('13').value = saved13;
-     var saved14 = localStorage.getItem('text14');
-     document.getElementById('14').value = saved14;
-     var saved15 = localStorage.getItem('text15');
-     document.getElementById('15').value = saved15;
-     var saved16 = localStorage.getItem('text16');
-     document.getElementById('16').value = saved16;
-     var saved17 = localStorage.getItem('text17');
-     document.getElementById('17').value = saved17;
-});
-
+  });
